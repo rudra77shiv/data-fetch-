@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BUTTON</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+    <style>
+      #btn:hover {
+        background-color: #8757e087;
+      }
+
+      .btn {
+        width: 30%;
+      }
+
+      .pra {
+        width: 30%;
+      }
+
+      #table {
+        border: 1px;
+      }
+
+      .pra {
+        font-size: large;
+        font-family: cursive;
+      }
+
+      #heading {
+        color: red;
+      }
+    </style>
+    <script>
+      
+      const process = () => {
+        const status = $("#status");
+        status.html("Processing...");
+       {
+          status.html("Requesting...");
+          axios.get("https://swapi.dev/api/people").then((data)=>{
+var results = data.data.results
+
+            $("#table").append(
+                "<tr><th>NAME</th><th>HEIGHT</th><th>MASS</th><th>HAIR COLOR</th><th>SKIN COLOR</th><th>EYE COLOR</th><th>BIRTH YEAR</th><th>GENDER</th></tr>"
+              );
+              results.forEach(element => {
+    $("#table").append(
+      "<tr><td>" +
+        element.name +
+        "</td>" +
+        "<td>" +
+        element.height +
+        "</td>" +
+        "<td>" +
+        element.mass +
+        "</td>" +
+        "<td>" +
+        element.hair_color +
+        "</td>" +
+        "<td>" +
+        element.skin_color +
+        "</td>" +
+        "<td>" +
+        element.eye_color +
+        "</td>" +
+        "<td>" +
+        element.birth_year +
+        "</td>" +
+        "<td>" +
+        element.gender +
+        "</td></tr>"
+    );
+  });
+              
+
+              $("#status").remove();
+              $("button").remove();
+            
+
+
+
+
+
+          })
+            
+        };
+      };
+    </script>
+  </head>
+
+  <body>
+    <h1 id="heading">TROOPS DETAILS </h1>
+    <table id="table" border="1">
+      <!-- <th>NAME</th>
+      <th>HEIGHT</th>
+      <th>MASS</th>
+      <th>HAIR COLOR</th>
+      <th>SKIN COLOR</th>
+      <th>EYE COLOR</th>
+      <th>BIRTH YEAR</th>
+      <th>GENDER</th> -->
+    </table>
+    <p id="status" class="pra">click button to get details</p>
+    <center>
+      <button class="btn" id="btn" onclick="process()">SUBMIT</button>
+    </center>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BUTTON</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+    <style>
+      #btn:hover {
+        background-color: #8757e087;
+      }
+
+      .btn {
+        width: 30%;
+      }
+
+      .pra {
+        width: 30%;
+      }
+
+      #table {
+        border: 1px;
+      }
+
+      .pra {
+        font-size: large;
+        font-family: cursive;
+      }
+
+      #heading {
+        color: red;
+      }
+    </style>
+    <script>
+      
+      const process = () => {
+        const status = $("#status");
+        status.html("Processing...");
+       {
+          status.html("Requesting...");
+          axios.get("https://swapi.dev/api/people").then((data)=>{
+var results = data.data.results
+
+            $("#table").append(
+                "<tr><th>NAME</th><th>HEIGHT</th><th>MASS</th><th>HAIR COLOR</th><th>SKIN COLOR</th><th>EYE COLOR</th><th>BIRTH YEAR</th><th>GENDER</th></tr>"
+              );
+              for (let i = 0; i < results.length; i++) {
+                $("#table").append(
+                  "<tr><td>" +
+                    results[i].name +
+                    "</td>" +
+                    "<td>" +
+                    results[i].height +
+                    "</td>" +
+                    "<td>" +
+                    results[i].mass +
+                    "</td>" +
+                    "<td>" +
+                    results[i].hair_color +
+                    "</td>" +
+                    "<td>" +
+                    results[i].skin_color +
+                    "</td>" +
+                    "<td>" +
+                    results[i].eye_color +
+                    "</td>" +
+                    "<td>" +
+                    results[i].birth_year +
+                    "</td>" +
+                    "<td>" +
+                    results[i].gender +
+                    "</td></tr>"
+                );
+              }
+
+              $("#status").remove();
+              $("button").remove();
+            
+
+
+
+
+
+          })
+            
+        };
+      };
+    </script>
+  </head>
+
+  <body>
+    <h1 id="heading">TROOPS DETAILS </h1>
+    <table id="table" border="1">
+      <!-- <th>NAME</th>
+      <th>HEIGHT</th>
+      <th>MASS</th>
+      <th>HAIR COLOR</th>
+      <th>SKIN COLOR</th>
+      <th>EYE COLOR</th>
+      <th>BIRTH YEAR</th>
+      <th>GENDER</th> -->
+    </table>
+    <p id="status" class="pra">click button to get details</p>
+    <center>
+      <button class="btn" id="btn" onclick="process()">SUBMIT</button>
+    </center>
+  </body>
+</html>
